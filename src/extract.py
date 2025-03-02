@@ -54,26 +54,31 @@ def get_public_holidays(public_holidays_url: str, year: str) -> DataFrame:
         raise SystemExit(e)
 
 
-def extract(
-    csv_folder: str, csv_table_mapping: Dict[str, str], public_holidays_url: str
-) -> Dict[str, DataFrame]:
-    """Extract the data from the csv files and load them into the dataframes.
-    Args:
-        csv_folder (str): The path to the csv's folder.
-        csv_table_mapping (Dict[str, str]): The mapping of the csv file names to the
-        table names.
-        public_holidays_url (str): The url to the public holidays.
-    Returns:
-        Dict[str, DataFrame]: A dictionary with keys as the table names and values as
-        the dataframes.
+def extract(csv_folder: str, csv_table_mapping: Dict[str, str], public_holidays_url: str) -> Dict[str, DataFrame]:
     """
+    Extrae los datos de los archivos CSV y los carga en dataframes.
+    
+    Args:
+        csv_folder (str): Ruta a la carpeta que contiene los archivos CSV.
+        csv_table_mapping (Dict[str, str]): Diccionario que mapea nombres de archivos CSV a nombres de tablas.
+        public_holidays_url (str): URL desde la que se obtendrán los días festivos públicos.
+    
+    Returns:
+        Dict[str, DataFrame]: Diccionario con nombres de tablas como claves y dataframes como valores.
+    """
+    # Crea un diccionario de dataframes:
+    # Para cada par (nombre del archivo CSV, nombre de la tabla) en csv_table_mapping,
+    # lee el archivo CSV y lo asigna al nombre de la tabla correspondiente.
     dataframes = {
-        table_name: read_csv(f"{csv_folder}/{csv_file}")
-        for csv_file, table_name in csv_table_mapping.items()
+        table_name: read_csv(f"{csv_folder}/{csv_file}")  # Lee el archivo CSV ubicado en la ruta especificada.
+        for csv_file, table_name in csv_table_mapping.items()  # Itera sobre cada elemento del mapeo.
     }
 
+    # Obtiene los días festivos públicos para el año 2017 desde la URL proporcionada.
     holidays = get_public_holidays(public_holidays_url, "2017")
 
+    # Agrega el dataframe de días festivos al diccionario bajo la clave "public_holidays".
     dataframes["public_holidays"] = holidays
 
+    # Retorna el diccionario que contiene todos los dataframes.
     return dataframes
