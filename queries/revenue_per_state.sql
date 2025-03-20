@@ -8,8 +8,8 @@ SELECT
 FROM 
     orders
 WHERE 
-    order_status = 'delivered' AND
-    order_delivered_customer_date IS NOT NULL
+    order_status = 'delivered'
+    AND order_delivered_customer_date IS NOT NULL
 GROUP BY 
     customer_state
 ORDER BY 

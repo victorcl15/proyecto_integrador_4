@@ -14,9 +14,9 @@ FROM
 JOIN
     order_items oi ON o.order_id = oi.order_id
 WHERE
-    o.order_status = 'delivered' AND
-    o.order_delivered_customer_date IS NOT NULL AND
-    oi.category IS NOT NULL
+    o.order_status = 'delivered'
+    AND o.order_delivered_customer_date IS NOT NULL
+    AND oi.category IS NOT NULL
 GROUP BY
     oi.category
 ORDER BY

@@ -19,22 +19,22 @@ WITH MonthlyRevenue AS (
 SELECT
     month_no,
     CASE month_no
-        WHEN '01' THEN 'Ene'
+        WHEN '01' THEN 'Jan'
         WHEN '02' THEN 'Feb'
         WHEN '03' THEN 'Mar'
-        WHEN '04' THEN 'Abr'
+        WHEN '04' THEN 'Apr'
         WHEN '05' THEN 'May'
         WHEN '06' THEN 'Jun'
         WHEN '07' THEN 'Jul'
-        WHEN '08' THEN 'Ago'
+        WHEN '08' THEN 'Aug'
         WHEN '09' THEN 'Sep'
         WHEN '10' THEN 'Oct'
         WHEN '11' THEN 'Nov'
-        WHEN '12' THEN 'Dic'
+        WHEN '12' THEN 'Dec'
     END AS month,
-    COALESCE(MAX(CASE WHEN year = '2016' THEN total_revenue END), 0.00) AS Year2016,
-    COALESCE(MAX(CASE WHEN year = '2017' THEN total_revenue END), 0.00) AS Year2017,
-    COALESCE(MAX(CASE WHEN year = '2018' THEN total_revenue END), 0.00) AS Year2018
+    COALESCE(MAX(CASE WHEN year = '2016' THEN total_revenue END), 0.00) AS "Year2016",
+    COALESCE(MAX(CASE WHEN year = '2017' THEN total_revenue END), 0.00) AS "Year2017",
+    COALESCE(MAX(CASE WHEN year = '2018' THEN total_revenue END), 0.00) AS "Year2018"
 FROM
     MonthlyRevenue
 GROUP BY

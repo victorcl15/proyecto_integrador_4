@@ -10,12 +10,12 @@
 -- 4. order_status == 'delivered' AND order_delivered_customer_date IS NOT NULL
 
 SELECT 
-    customer_state AS Estado,
-    AVG(CAST(julianday(order_delivered_customer_date) - julianday(order_estimated_delivery_date) AS INTEGER)) AS Diferencia_Entrega
+    customer_state AS "State",
+    AVG(CAST(julianday(order_delivered_customer_date) - julianday(order_estimated_delivery_date) AS INTEGER)) AS "Delivery_Difference"
 FROM 
     orders
 WHERE 
-    order_status = 'delivered' AND 
-    order_delivered_customer_date IS NOT NULL
+    order_status = 'delivered' 
+    AND order_delivered_customer_date IS NOT NULL
 GROUP BY 
     customer_state;
