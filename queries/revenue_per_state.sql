@@ -3,15 +3,18 @@
 -- y la segunda mostrará el ingreso total de cada uno.
 -- PISTA: Todos los pedidos deben tener un estado "delivered" y la fecha real de entrega no debe ser nula.
 SELECT 
-    customer_state,
-    SUM(total_amount) AS Revenue
-FROM 
-    orders
+    c.customer_state,
+    SUM(oi.price + oi.freight_value) AS Revenue
+FROM olist_orders AS o
+JOIN olist_customers AS c 
+    ON o.customer_id = c.customer_id
+JOIN olist_order_items AS oi 
+    ON o.order_id = oi.order_id
 WHERE 
-    order_status = 'delivered'
-    AND order_delivered_customer_date IS NOT NULL
+    o.order_status = 'delivered' 
+    AND o.order_delivered_customer_date IS NOT NULL
 GROUP BY 
-    customer_state
+    c.customer_state
 ORDER BY 
-    Revenue DESC
-LIMIT 10;
+    Revenue DESC
+LIMIT 10;

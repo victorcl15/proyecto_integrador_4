@@ -2,9 +2,6 @@
 -- Cantidad. La primera contendrá las diferentes clases de estado de los pedidos,
 -- y la segunda mostrará el total de cada uno.
 SELECT 
-    order_status,
-    COUNT(*) AS "Ammount"
-FROM 
-    orders
-GROUP BY 
-    order_status;
+    order_status, COUNT(*) AS "Ammount" 
+FROM olist_orders 
+GROUP BY order_status;
