@@ -11,8 +11,6 @@ WITH OrderPayment AS (
     SUM(payment_value) AS total_payment
   FROM 
     olist_order_payments
-  WHERE 
-    payment_sequential = 1
   GROUP BY 
     order_id
 )
