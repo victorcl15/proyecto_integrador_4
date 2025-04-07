@@ -69,3 +69,33 @@ Si deseas aprender más sobre cómo probar código en Python, revisa:
 - [Effective Python Testing With Pytest](https://realpython.com/pytest-python-testing/)
 - [The Hitchhiker’s Guide to Python: Testing Your Code](https://docs.python-guide.org/writing/tests/)
 
+Orquestación con Apache Airflow
+Para implementar la orquestación del pipeline de datos, se ha agregado una integración con Apache Airflow, que permite automatizar y monitorear todo el flujo de trabajo.
+
+Estructura de archivos
+
+proyecto_integrador/
+├── airflow/
+│   ├── dags/
+│   │   └── etl_olist_dag.py    # Define el DAG para el pipeline ELT
+│   └── scripts/
+│       ├── extract_task.py     # Script para la tarea de extracción
+│       ├── load_task.py        # Script para la tarea de carga
+│       └── transform_task.py   # Script para la tarea de transformación
+
+docker run -d --name airflow `
+    -p 8080:8080 `
+    -v ${PWD}:/opt/airflow/project_files `
+    -e AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/project_files/airflow/dags `
+    apache/airflow standalone
+
+docker exec -it airflow bash 
+
+airflow users create \
+    --username victor \
+    --firstname Admin \
+    --lastname User \
+    --role Admin \
+    --email victor@example.com \
+    --password admin
+
